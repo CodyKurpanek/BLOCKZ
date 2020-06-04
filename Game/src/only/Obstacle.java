@@ -9,31 +9,20 @@ public class Obstacle{
 	private double xPos, yPos;
 	private int height, width;
 	private double[] NW, NE, SE, SW;
-	private Rectangle img;
 	private double speed = (int)(Math.random() * 5) + 1;
 	private GamePanel controller;
 
 	public Obstacle(int type, GamePanel controller) {
 		this.controller = controller;
-		setHeight(100);
+
 		setWidth(100);
+		setHeight(100);
 		NW = new double[2];
 		NE = new double[2];
 		SE = new double[2];
 		SW = new double[2];
 		setXPos(730);
 		setYPos(700 - 100 * type);
-	}
-	
-	public Obstacle(double xPos, double yPos, int height, int width) {
-		this.xPos = xPos;
-		this.yPos = yPos;
-		this.height = height;
-		this.width = width;
-		NW = new double[] {xPos - this.width / 2, yPos - this.height / 2};
-		NE = new double[] {xPos + this.width / 2, yPos - this.height / 2};
-		SE = new double[] {xPos + this.width / 2, yPos + this.height / 2};
-		SW = new double[] {xPos - this.width / 2, yPos + this.height / 2};
 	}
 	
 	public Obstacle(double xPos, double yPos, int height, int width, GamePanel controller) {

@@ -15,40 +15,42 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePanel extends JPanel implements KeyListener{
+public class GamePanel extends JPanel{
 	
 	private JLabel highScoreLabel;
 	private JLabel scoreLabel;
 	private Game controller;
-	private ActionListener moveUser;
+	private TestFrame window;
+	
 	private Timer t;
+	private ActionListener newFrame;
+
+	
 	private ArrayList<Obstacle> obstacles;
 	private User user;
-	private boolean space;
-	private Graphics g;
-	private int count = 0;
+	private int IntervalsSinceSpawn = 0;
 	private int score = 0;
-	private int interval = 300;
+	private int intervalBtwnSpawn = 300;
+	// for when this is referring to an action listener
 	GamePanel a = this;
 	
-	public GamePanel(Game controller) {
+	public GamePanel(Game controller, TestFrame window) {
 		super();
 		this.controller = controller;
+		this.window = window;
 		scoreLabel = new JLabel("Score: 0");
-		
 		highScoreLabel = new JLabel("High Score: " + controller.getHighScore());
-		highScoreLabel.setFocusable(true);
-		highScoreLabel.addKeyListener(this);
 		obstacles = new ArrayList<Obstacle>();
 		user = new User(this);
 		this.setOpaque(false);
 
 		
 		addActionListeners();
-		t = new Timer(10, moveUser);
+		t = new Timer(10, newFrame);
 		t.setInitialDelay(1000);
 
 		startGame();
+		
 		
 		
 	}
@@ -67,9 +69,9 @@ public class GamePanel extends JPanel implements KeyListener{
 	}
 	
 	public void addActionListeners() {
-		moveUser = new ActionListener() {
+		newFrame = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				count += 1;
+				IntervalsSinceSpawn += 1;
 				for (int i = 0; i < obstacles.size(); i ++) {
 					obstacles.get(i).setXPos(obstacles.get(i).getXPos() - obstacles.get(i).getSpeed());
 					if (obstacles.get(i).isColliding(user) == 0) {
@@ -85,7 +87,7 @@ public class GamePanel extends JPanel implements KeyListener{
 					}
 				}
 				
-				if (space == true) {
+				if (window.getSpace() == true) {
 					if (user.getNE()[1] >= 50 && user.getSE()[1] <= 770) {
 						user.setSpeed(user.getSpeed() + 0.2);
 						user.setYPos(user.getYPos() - user.getSpeed());
@@ -117,12 +119,12 @@ public class GamePanel extends JPanel implements KeyListener{
 					
 				}
 				
-				if (count > interval) {
+				if (IntervalsSinceSpawn > intervalBtwnSpawn) {
 					obstacles.add(new Obstacle((int)(Math.random() * 7), a));
-					count = 0;
+					IntervalsSinceSpawn = 0;
 					repaint();
-					if (interval > 60) {
-						interval = interval - 30;
+					if (intervalBtwnSpawn > 60) {
+						intervalBtwnSpawn = intervalBtwnSpawn - 30;
 					}
 				}
 			}
@@ -154,39 +156,18 @@ public class GamePanel extends JPanel implements KeyListener{
 	public void startGame() {
 		this.addComponents();
 		this.setEnabled(true);
+		t.start();
 		highScoreLabel.setEnabled(true);
 		highScoreLabel.setVisible(true);
-		highScoreLabel.isEnabled();
-		highScoreLabel.isVisible();
-		
-		t.start();
 		System.out.println("Started");
+
 	}
 	
-
-
-
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if (e.getKeyCode() == 32) {
-			space = true;
-		}
+	public TestFrame getWindow() {
+		return window;
 	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if (e.getKeyCode() == 32) {
-			space = false;
-		}
-	}
 
-	@Override 
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

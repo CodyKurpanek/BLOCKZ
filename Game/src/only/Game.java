@@ -7,7 +7,6 @@ public class Game{
 	private int width;
 	private int height;
 	private int highScore = 0;
-	private JFrame b;
 	
 	public Game() {
 		window = new TestFrame(this);
@@ -16,22 +15,9 @@ public class Game{
 		this.width = width;
 		this.height = height;
 		window = new TestFrame(this);
-		b = new JFrame();
 	}
 	
-	public void play() {
-		/*
-		b.setSize(1300, 800);
-;
-		b.setVisible(true);
-		
-		GamePanel a = new GamePanel(this);
-		b.add(a);
-		
-		a.startGame();
-		a.setVisible(true);
-		*/
-		
+	public void play() {		
 		window.gameScreen();
 	}
 	
@@ -50,6 +36,10 @@ public class Game{
 		window.getHomePanel().setHighScoreLabel("High Score: " + highScore);
 	}
 	
+	public void setSize() {
+		
+	
+	}
 	public int[] getSize() {
 		int[] size = {width, height};
 		return size;
