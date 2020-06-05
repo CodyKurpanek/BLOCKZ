@@ -1,6 +1,7 @@
 package only;
 
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -15,12 +16,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+
+
+
 public class GamePanel extends JPanel{
 	
 	private JLabel highScoreLabel;
 	private JLabel scoreLabel;
 	private Game controller;
-	private TestFrame window;
+	private Frame window;
 	
 	private Timer t;
 	private ActionListener newFrame;
@@ -34,12 +38,18 @@ public class GamePanel extends JPanel{
 	// for when this is referring to an action listener
 	GamePanel a = this;
 	
-	public GamePanel(Game controller, TestFrame window) {
+	public GamePanel(Game controller, Frame window) {
 		super();
 		this.controller = controller;
 		this.window = window;
 		scoreLabel = new JLabel("Score: 0");
 		highScoreLabel = new JLabel("High Score: " + controller.getHighScore());
+		
+
+		
+		
+		
+		
 		obstacles = new ArrayList<Obstacle>();
 		user = new User(this);
 		this.setOpaque(false);
@@ -163,7 +173,7 @@ public class GamePanel extends JPanel{
 
 	}
 	
-	public TestFrame getWindow() {
+	public Frame getWindow() {
 		return window;
 	}
 

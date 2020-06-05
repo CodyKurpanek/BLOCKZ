@@ -1,5 +1,5 @@
 package only;
-public class TestRunner{
+public class Runner{
 	public static void main(String args[]) {
 		Game a = new Game(1300, 800);
 	}

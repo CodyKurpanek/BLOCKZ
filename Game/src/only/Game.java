@@ -3,18 +3,18 @@ package only;
 import javax.swing.JFrame;
 
 public class Game{
-	private TestFrame window;
+	private Frame window;
 	private int width;
 	private int height;
 	private int highScore = 0;
 	
 	public Game() {
-		window = new TestFrame(this);
+		window = new Frame(this);
 	}
 	public Game(int width, int height) {
 		this.width = width;
 		this.height = height;
-		window = new TestFrame(this);
+		window = new Frame(this);
 	}
 	
 	public void play() {		

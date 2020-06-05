@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class TestFrame extends JFrame implements KeyListener{
+public class Frame extends JFrame implements KeyListener{
 	
 	private HomePanel homePanel;
 	//private GamePanel gamePanel;
@@ -17,7 +17,7 @@ public class TestFrame extends JFrame implements KeyListener{
 	private boolean space;
 	private JLabel ALBot;
 	
-	public TestFrame(Game controller) {
+	public Frame(Game controller) {
 		super();
 		ALBot = new JLabel("j");
 		ALBot.setVisible(true);

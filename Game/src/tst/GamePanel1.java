@@ -1,3 +1,5 @@
+
+
 package tst;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -28,6 +30,8 @@ public class GamePanel1 extends JPanel{
 		this.controller = controller;
 		this.window = window;
 		this.setOpaque(false);
+		
+		
 		
 }
 
