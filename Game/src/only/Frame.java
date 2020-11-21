@@ -15,15 +15,17 @@ public class Frame extends JFrame implements KeyListener{
 	private Game controller;
 	private JPanel panelCards;
 	private boolean space;
-	private JLabel ALBot;
+	private JLabel LabelForKeyListener;
 	
 	public Frame(Game controller) {
+		//calls Jframe constructor
 		super();
-		ALBot = new JLabel("j");
-		ALBot.setVisible(true);
-		ALBot.setFocusable(true);
-		ALBot.addKeyListener(this);
-		this.add(ALBot);
+		LabelForKeyListener = new JLabel("j");
+		LabelForKeyListener.setVisible(true);
+		LabelForKeyListener.setFocusable(true);
+		LabelForKeyListener.addKeyListener(this);
+		this.add(LabelForKeyListener);
+		//panelCards keeps track of HomePanel and GamePanel
 		this.panelCards = new JPanel(new CardLayout());
 		this.controller = controller;
 		this.setEnabled(true);
@@ -32,6 +34,7 @@ public class Frame extends JFrame implements KeyListener{
 	}
 		
 	public void loadFrame() {
+		//add homePanel to panelCards with key "HOME"
 		panelCards.add(homePanel, "HOME");
 		this.add(panelCards);
 		panelCards.setVisible(true);
@@ -39,6 +42,7 @@ public class Frame extends JFrame implements KeyListener{
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setEnabled(true);
+		//show HomePanel
 		((CardLayout)panelCards.getLayout()).show(panelCards , "HOME");
 	}
 	
@@ -46,13 +50,19 @@ public class Frame extends JFrame implements KeyListener{
 	public HomePanel getHomePanel() {
 		return homePanel;
 	}
-	
+
+	/**
+ 	* Deletes the current GamePanel and sets HomePanel as the primary panel
+ 	*/
 	public void startScreen() {
 		panelCards.remove(1);
 		((CardLayout)panelCards.getLayout()).show(panelCards , "HOME");
 		
 	}
 	
+	/**
+ 	* Creates a new GamePanel, with initialized timers, then sets it as the primary panel
+ 	*/
 	public void gameScreen() {
 		panelCards.add(new GamePanel(controller, this), "GAME");
 		panelCards.setEnabled(true);
@@ -85,5 +95,4 @@ public class Frame extends JFrame implements KeyListener{
 		// TODO Auto-generated method stub
 		
 	}
-	
 }
