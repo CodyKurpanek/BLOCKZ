@@ -9,11 +9,13 @@ public class Game{
 	private int highScore = 0;
 	
 	public Game() {
+		//Creates the JFrame that will contain the HomePanel and GamePanel
 		window = new Frame(this);
 	}
 	public Game(int width, int height) {
 		this.width = width;
 		this.height = height;
+		//Creates the JFrame that will contain the HomePanel and GamePanel
 		window = new Frame(this);
 	}
 	
@@ -36,10 +38,11 @@ public class Game{
 		window.getHomePanel().setHighScoreLabel("High Score: " + highScore);
 	}
 	
-	public void setSize() {
-		
-	
+	public void setSize(int width, int height) {
+		this.width = width;
+		this.height = height;
 	}
+	
 	public int[] getSize() {
 		int[] size = {width, height};
 		return size;

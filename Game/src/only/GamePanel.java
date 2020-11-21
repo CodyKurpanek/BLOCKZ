@@ -45,24 +45,25 @@ public class GamePanel extends JPanel{
 		scoreLabel = new JLabel("Score: 0");
 		highScoreLabel = new JLabel("High Score: " + controller.getHighScore());
 		
-
-		
-		
-		
-		
 		obstacles = new ArrayList<Obstacle>();
 		user = new User(this);
 		this.setOpaque(false);
 
-		
 		addActionListeners();
+		//After 1 second, start a timer that ticks every 10 ms. Used for Obstacle Creation
 		t = new Timer(10, newFrame);
 		t.setInitialDelay(1000);
 
 		startGame();
-		
-		
-		
+	}
+
+	public void startGame() {
+		this.addComponents();
+		this.setEnabled(true);
+		t.start();
+		highScoreLabel.setEnabled(true);
+		highScoreLabel.setVisible(true);
+		System.out.println("Started");
 	}
 
 	private void addComponents() {
@@ -73,15 +74,14 @@ public class GamePanel extends JPanel{
 	public int getScore() {
 		return score;
 	}
-
-
-	public void setActionListeners() {
-	}
 	
 	public void addActionListeners() {
+		//Action listener for object creation
 		newFrame = new ActionListener() {
+			//When the timer fires
 			public void actionPerformed(ActionEvent e) {
 				IntervalsSinceSpawn += 1;
+				//For each obstacle, move it, then check for collision with user
 				for (int i = 0; i < obstacles.size(); i ++) {
 					obstacles.get(i).setXPos(obstacles.get(i).getXPos() - obstacles.get(i).getSpeed());
 					if (obstacles.get(i).isColliding(user) == 0) {
@@ -162,16 +162,6 @@ public class GamePanel extends JPanel{
 		user.draw(g);
 	}
 	
-	
-	public void startGame() {
-		this.addComponents();
-		this.setEnabled(true);
-		t.start();
-		highScoreLabel.setEnabled(true);
-		highScoreLabel.setVisible(true);
-		System.out.println("Started");
-
-	}
 	
 	public Frame getWindow() {
 		return window;
