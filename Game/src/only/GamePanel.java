@@ -32,7 +32,7 @@ public class GamePanel extends JPanel{
 	
 	private ArrayList<Obstacle> obstacles;
 	private User user;
-	private int IntervalsSinceSpawn = 0;
+	private int timeSinceLastSpawn = 0;
 	private int score = 0;
 	private int intervalBtwnSpawn = 300;
 	// for when this is referring to an action listener
@@ -80,23 +80,24 @@ public class GamePanel extends JPanel{
 		newFrame = new ActionListener() {
 			//When the timer fires
 			public void actionPerformed(ActionEvent e) {
-				IntervalsSinceSpawn += 1;
 				//For each obstacle, move it, then check for collision with user
 				for (int i = 0; i < obstacles.size(); i ++) {
 					obstacles.get(i).setXPos(obstacles.get(i).getXPos() - obstacles.get(i).getSpeed());
-					if (obstacles.get(i).isColliding(user) == 0) {
+					//if collding with user, call game.stop() and update scores and timers
+					if (obstacles.get(i).isColliding(user) == 1) {
 						controller.stop();
 						controller.updateScore(score);
 						t.stop();
 					}
-					else if (obstacles.get(i).isColliding(user) == 1) {
+					//if colliding with edge of screen, remove object
+					else if (obstacles.get(i).isColliding(user) == 2) {
 						obstacles.remove(i);
 						i --;
 						score += 1;
 						scoreLabel.setText("Score: " + score);
 					}
 				}
-				
+				//Move user upwards depending on whether Frame detects space is clicked
 				if (window.getSpace() == true) {
 					if (user.getNE()[1] >= 50 && user.getSE()[1] <= 770) {
 						user.setSpeed(user.getSpeed() + 0.2);
@@ -112,6 +113,7 @@ public class GamePanel extends JPanel{
 						user.setSpeed(0);
 					}
 				}
+				//else, move downwards
 				else{
 					if(user.getNE()[1] >= 50 && user.getSE()[1] <= 770){
 						user.setSpeed(user.getSpeed() - 0.2);
@@ -126,12 +128,13 @@ public class GamePanel extends JPanel{
 						}
 						user.setSpeed(0);
 					}
-					
 				}
-				
-				if (IntervalsSinceSpawn > intervalBtwnSpawn) {
+				//timeSinceLastSpawn is continuously increased every time the timer fires
+				timeSinceLastSpawn += 1;
+				//if timeSinceLastSpawn reaches intervalBtwnSpawn, add a new object 
+				if (!(timeSinceLastSpawn < intervalBtwnSpawn)) {
 					obstacles.add(new Obstacle((int)(Math.random() * 7), a));
-					IntervalsSinceSpawn = 0;
+					timeSinceLastSpawn = 0;
 					repaint();
 					if (intervalBtwnSpawn > 60) {
 						intervalBtwnSpawn = intervalBtwnSpawn - 30;
@@ -141,7 +144,8 @@ public class GamePanel extends JPanel{
 		};
 	}
 	
-	
+	//This method is onstantly called by Jpanel; used to draw
+	//all of the current obstacles and the user
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if (obstacles.size() > 0) {
@@ -152,22 +156,7 @@ public class GamePanel extends JPanel{
 		user.draw(g);
 	}
 	
-	public void repaint(Graphics g) {
-		super.repaint();
-		if (obstacles.size() > 0) {
-			for (Obstacle obs: obstacles) {
-				obs.draw(g);
-			}
-		}
-		user.draw(g);
-	}
-	
-	
 	public Frame getWindow() {
 		return window;
 	}
-
-
-
-
 }
