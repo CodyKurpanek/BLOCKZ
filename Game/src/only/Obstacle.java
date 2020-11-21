@@ -117,6 +117,7 @@ public class Obstacle{
 		controller.repaint();
 	}
 	
+	//Draws the obstacle; Called by HomePanel when necessary
 	void draw(Graphics g) {
 		g.setColor(Color.black);
 		g.fillRect((int)NW[0], (int)NW[1], width, height);
@@ -129,15 +130,19 @@ public class Obstacle{
 		*/
 	}
 	
+	/**
+ 	* @param user user object
+ 	* @return 0 if colliding with user, 1 if colliding with 
+ 	*/
 	public int isColliding(User user) {
 		if (NW[0] < user.getNE()[0] && NE[1] < user.getSE()[1] &&
 				NE[0] > user.getSW()[0] && SE[1] > user.getNE()[1]) {
-			return 0;
-		}
-		if (NE[0] <= 0) {
 			return 1;
 		}
-		return -1;
+		if (NE[0] <= 0) {
+			return 2;
+		}
+		return 0;
 	}
 
 
