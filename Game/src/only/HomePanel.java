@@ -14,8 +14,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import tst.Game1;
-
 
 public class HomePanel extends JPanel{
 	private Game controller;
