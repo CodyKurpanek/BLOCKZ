@@ -14,14 +14,16 @@ public class User extends Obstacle{
 	private Color a;
 	
 
-	
-	
+
 	public User(GamePanel controller){
 		super(100, 700, 50, 50, controller);
 		setSpeed(0);
+		color = "blue";
 		
+		
+
 		try {
-		      File choseC = new File("src/only/Color.txt");
+		      File choseC = new File("Game/src/only/Color.txt");
 		      Scanner i = new Scanner(choseC);
 		        color = i.nextLine();
 		        a = Color.getColor(color);
