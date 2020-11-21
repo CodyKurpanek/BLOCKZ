@@ -70,6 +70,7 @@ public class HomePanel extends JPanel{
 
 	}
 	
+	//actionListener that checks for whether the space bar is pressed
 	public void setActionListeners(){
 		playButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent mouseClick)

@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
+import java.lang.reflect.TypeVariable;
 import java.util.Scanner;
 
 
@@ -21,19 +22,19 @@ public class User extends Obstacle{
 		color = "blue";
 		
 		
+		//If possible, change color to color in Color.txt
+		try{
+		    File choseC = new File("Game/src/only/Color.txt");
+		    Scanner i = new Scanner(choseC);
+		    color = i.nextLine();
+		    a = Color.getColor(color);
+		    System.out.println(color);
+		    i.close();
+		} catch (FileNotFoundException e) {
+		    System.out.println("Error:");
+		    e.printStackTrace();
+		}
 
-		try {
-		      File choseC = new File("Game/src/only/Color.txt");
-		      Scanner i = new Scanner(choseC);
-		        color = i.nextLine();
-		        a = Color.getColor(color);
-		        System.out.println(color);
-		      i.close();
-		    } catch (FileNotFoundException e) {
-		      System.out.println("Error:");
-		      e.printStackTrace();
-		    }
-		
 	}
 	
 	void draw(Graphics g) {
