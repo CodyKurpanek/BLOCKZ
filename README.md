@@ -1,4 +1,1 @@
-Open the jar file to play.
-Dodge the obstacles and reach your personal High Score!
-
-Source code is in the game folder. Feel free to clone the repository and edit.
+For a lab in my AP CSA class, we were given a fully functioning GUI for a card game, and were given specific tasks to create the functionality of the game itself. Interested in understanding how the GUI worked, I decided to create my own GUI and game from scratch, using the other as inspiration.
